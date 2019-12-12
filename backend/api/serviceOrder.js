@@ -37,15 +37,15 @@ module.exports = app => {
                     cpf: os.cliente.cpf,
                     email: os.cliente.email,
                     telefone: os.cliente.telefone
-                }).where({ id: os.cliente.id })
+                }).where({ id: os.clienteId })
 
                 await app.db('enderecos')
                     .update(os.cliente.endereco)
-                    .where({ id: os.cliente.endereco.id })
+                    .where({ clienteId: os.clienteId })
 
                 await app.db('produtos')
                     .update(os.produto)
-                    .where({ id: os.produto.id })
+                    .where({ id: os.produtoId })
 
                 res.status(204).send()
             } catch (err) {
@@ -102,7 +102,9 @@ module.exports = app => {
                     ...os.produto, clienteId: idClient
                 })
 
-                await app.db('enderecos').insert({ ...os.cliente.endereco, clienteId: idClient })
+                await app.db('enderecos').insert({
+                    ...os.cliente.endereco, clienteId: idClient
+                })
 
                 await app.db('ordensDeServico').insert({
                     numero: os.numero,
