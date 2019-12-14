@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import CadastroOS from '../views/CadastroOS.vue'
 
 Vue.use(VueRouter)
 
@@ -15,11 +14,6 @@ const routes = [
     path: '/pesquisar',
     nome: 'pesquisar',
     component: Home
-  },
-  {
-    path: '/cadastro',
-    nome: 'cadastroOS',
-    component: CadastroOS
   },
 ]
 

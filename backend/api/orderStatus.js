@@ -24,11 +24,16 @@ module.exports = app => {
                 .where({ situacao: 'Aguardando Retirada' })
                 .first()
 
+            const osNextNumber = await app.db('ordensDeServico')
+                .count('id as osNextNumber')
+                .first()
+
             const st = {
                 ...awaitingBudget,
                 ...awaitingAuthorization,
                 ...authorizedBudget,
-                ...awaitingRemoval
+                ...awaitingRemoval,
+                ...osNextNumber
             }
 
             res.json(st)

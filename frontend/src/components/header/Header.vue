@@ -45,7 +45,6 @@ export default {
             drawer: true,
             listItems: [
                 { link: "/", icon: "home", title: "Início" },
-                { link: "/cadastro", icon: "assignment", title: "Cadastro OS" },
                 { link: "/pesquisar", icon: "search", title: "Pesquisar OS" }
             ]
         };

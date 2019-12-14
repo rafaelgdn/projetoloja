@@ -6,18 +6,9 @@ module.exports = app => {
         if (req.params.id) os.id = req.params.id
 
         try {
-            existsOrError(os.numero, 'Numero da OS não informado')
             existsOrError(os.cliente.nome, 'Nome do Cliente não informado')
             existsOrError(os.produto.marca, 'Marca do Produto não informada')
             existsOrError(os.produto.modelo, 'Modelo do Produto não informado')
-
-            const OsFromDB = await app.db('ordensDeServico')
-                .where({ numero: os.numero }).first()
-
-            if (!os.id) {
-                notExistsOrError(OsFromDB, 'Esse numero de OS já foi cadastrado')
-            }
-
         } catch (msg) {
             return res.status(400).send(msg)
         }
@@ -29,7 +20,8 @@ module.exports = app => {
                     situacao: os.situacao,
                     descricaoOrcamento: os.descricaoOrcamento,
                     valorOrcamento: os.valorOrcamento,
-                    sinalOrcamento: os.sinalOrcamento
+                    sinalOrcamento: os.sinalOrcamento,
+                    obs: os.obs
                 }).where({ id: os.id })
 
                 await app.db('clientes').update({
@@ -107,11 +99,11 @@ module.exports = app => {
                 })
 
                 await app.db('ordensDeServico').insert({
-                    numero: os.numero,
                     data: new Date(),
                     situacao: os.situacao,
                     descricaoOrcamento: os.descricaoOrcamento,
                     valorOrcamento: os.valorOrcamento,
+                    obs: os.obs,
                     clienteId: idClient,
                     produtoId: idProd
                 })

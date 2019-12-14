@@ -34,7 +34,7 @@
         </v-row>
         <v-row>
             <v-col cols="12">
-                <DetailsTable :ordensDeServico="ordensDeServico" />
+                <DetailsTable />
             </v-col>
         </v-row>
     </v-container>
@@ -57,38 +57,7 @@ export default {
         }
     },
     data() {
-        return {
-            ordensDeServico: [
-                {
-                    numero: "001",
-                    nome: "Rafael de Carvalho",
-                    cpf: "13665895422",
-                    telefone: "(21) 2776-3759",
-                    situacao: "Aguardando Orçamento"
-                },
-                {
-                    numero: "002",
-                    nome: "Rafael de Carvalho",
-                    cpf: "13665895423",
-                    telefone: "(21) 2776-3759",
-                    situacao: "Aguardando Autorização"
-                },
-                {
-                    numero: "003",
-                    nome: "Rafael de Carvalho",
-                    cpf: "13665895424",
-                    telefone: "(21) 2776-3759",
-                    situacao: "Orçamento Autorizado"
-                },
-                {
-                    numero: "004",
-                    nome: "Rafael de Carvalho",
-                    cpf: "13665895425",
-                    telefone: "(21) 2776-3759",
-                    situacao: "Aguardando Retirada"
-                }
-            ]
-        };
+        return {};
     }
 };
 </script>
