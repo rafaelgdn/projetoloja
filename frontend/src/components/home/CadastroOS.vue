@@ -82,6 +82,7 @@ export default {
         async save() {
             await axios.post(`${baseApiUrl}/service-order`, this.os);
             this.$store.commit("reloadOS");
+            this.$store.commit("reloadStatus");
             this.reset();
             this.$emit("closeDialog");
         },

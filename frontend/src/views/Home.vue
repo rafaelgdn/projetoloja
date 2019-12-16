@@ -11,25 +11,25 @@
                 cardIcon="assignment"
                 cardIconColor="primary"
                 cardTitle="Aguardando Orçamento"
-                cardCount="0"
+                :cardCount="this.$store.getters.getStatus.awaitingBudget"
             />
             <StatusBox
                 cardIcon="info"
                 cardIconColor="warning"
                 cardTitle="Aguardando Autorização"
-                cardCount="0"
+                :cardCount="this.$store.getters.getStatus.awaitingAuthorization"
             />
             <StatusBox
                 cardIcon="done"
                 cardIconColor="success"
                 cardTitle="Orçamento Autorizado"
-                cardCount="0"
+                :cardCount="this.$store.getters.getStatus.authorizedBudget"
             />
             <StatusBox
                 cardIcon="thumb_up"
                 cardIconColor="purple"
                 cardTitle="Aguardando Retirada"
-                cardCount="0"
+                :cardCount="this.$store.getters.getStatus.awaitingRemoval"
             />
         </v-row>
         <v-row>
@@ -58,6 +58,9 @@ export default {
     },
     data() {
         return {};
+    },
+    mounted() {
+        this.$store.commit("reloadStatus");
     }
 };
 </script>

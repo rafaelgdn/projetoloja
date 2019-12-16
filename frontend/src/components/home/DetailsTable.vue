@@ -46,7 +46,7 @@ export default {
                 { text: "Nome", value: "cliente.nome" },
                 { text: "CPF", value: "cliente.cpf" },
                 { text: "Telefone", value: "cliente.telefone" },
-                { text: "Situação", value: "situacao", align: "center" }
+                { text: "Situação", value: "situacao" }
             ]
         };
     },

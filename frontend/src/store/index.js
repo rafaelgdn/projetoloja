@@ -9,7 +9,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        serviceOrder: []
+        serviceOrder: [],
+        orderStatus: {}
     },
     getters: {
         date() {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
         getAllOS(state) {
             return state.serviceOrder
         },
+        getStatus(state) {
+            return state.orderStatus
+        }
     },
     mutations: {
         reloadOS(state) {
@@ -27,6 +31,12 @@ export default new Vuex.Store({
             axios.get(url).then(res => {
                 state.serviceOrder = res.data;
             });
+        },
+        reloadStatus(state) {
+            const url = `${baseApiUrl}/status`
+            axios.get(url).then(res => {
+                state.orderStatus = res.data
+            })
         }
     },
     actions: {
