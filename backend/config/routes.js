@@ -48,4 +48,7 @@ module.exports = app => {
     app.route('/status')
         // .all(app.config.passport.authenticate())
         .get(app.api.orderStatus.status)
+
+    app.route('/order-filter')
+        .get(app.api.orderFilter.get)
 }

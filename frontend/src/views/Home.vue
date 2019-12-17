@@ -11,24 +11,28 @@
                 cardIcon="assignment"
                 cardIconColor="primary"
                 cardTitle="Aguardando Orçamento"
+                cardAction="OrderAwaitingBudget"
                 :cardCount="this.$store.getters.getStatus.awaitingBudget"
             />
             <StatusBox
                 cardIcon="info"
                 cardIconColor="warning"
                 cardTitle="Aguardando Autorização"
+                cardAction="OrderAwaitingAuthorization"
                 :cardCount="this.$store.getters.getStatus.awaitingAuthorization"
             />
             <StatusBox
                 cardIcon="done"
                 cardIconColor="success"
                 cardTitle="Orçamento Autorizado"
+                cardAction="OrderAuthorizedBudget"
                 :cardCount="this.$store.getters.getStatus.authorizedBudget"
             />
             <StatusBox
                 cardIcon="thumb_up"
                 cardIconColor="purple"
                 cardTitle="Aguardando Retirada"
+                cardAction="OrderAwaitingRemoval"
                 :cardCount="this.$store.getters.getStatus.awaitingRemoval"
             />
         </v-row>

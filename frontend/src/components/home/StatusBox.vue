@@ -1,6 +1,6 @@
 <template>
     <v-col cols="12" sm="6" lg="3">
-        <v-card outlined class="pa-2">
+        <v-card @click="OrderFilter" outlined class="pa-2">
             <v-row no-gutters>
                 <v-col cols="3" class="d-flex justify-center align-center">
                     <v-icon
@@ -22,7 +22,18 @@
 
 <script>
 export default {
-    props: ["cardIcon", "cardTitle", "cardCount", "cardIconColor"]
+    props: [
+        "cardIcon",
+        "cardTitle",
+        "cardCount",
+        "cardIconColor",
+        "cardAction"
+    ],
+    methods: {
+        OrderFilter() {
+            this.$store.commit("OrderFilters", this.cardAction);
+        }
+    }
 };
 </script>
 

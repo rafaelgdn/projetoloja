@@ -1,8 +1,6 @@
 <template>
     <v-card tile outlined>
         <v-card-title class="d-flex flex-nowrap">
-            <span class="d-flex flex-nowrap">Ordens de Serviço</span>
-            <v-spacer style="width: 50%"></v-spacer>
             <v-text-field
                 class="mr-10 mt-0 pt-0"
                 v-model="search"

@@ -2,7 +2,8 @@
     <div class="text-center">
         <v-dialog v-model="dialog" width="80%">
             <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on" @click="nextOS">Cadastrar OS</v-btn>
+                <v-btn class="mr-3" color="primary" dark v-on="on" @click="nextOS">Cadastrar OS</v-btn>
+                <v-btn color="secondary" dark @click="reload">Limpar</v-btn>
             </template>
 
             <v-card>
@@ -37,6 +38,9 @@ export default {
             axios(`${baseApiUrl}/status`).then(res => {
                 this.osNextNumber = res.data.osNextNumber + 1;
             });
+        },
+        reload() {
+            this.$store.commit("reloadOS");
         }
     }
 };

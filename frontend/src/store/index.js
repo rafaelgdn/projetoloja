@@ -32,6 +32,12 @@ export default new Vuex.Store({
                 state.serviceOrder = res.data;
             });
         },
+        OrderFilters(state, payload) {
+            const url = `${baseApiUrl}/order-filter`;
+            axios.get(url).then(res => {
+                state.serviceOrder = res.data[payload]
+            });
+        },
         reloadStatus(state) {
             const url = `${baseApiUrl}/status`
             axios.get(url).then(res => {
