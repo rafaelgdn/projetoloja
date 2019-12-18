@@ -3,18 +3,13 @@
         <v-container>
             <v-row>
                 <v-col cols="12" md="2">
-                    <v-text-field
-                        v-model="os.cliente.cpf"
-                        :rules="cpfRules"
-                        label="CLIENTE: CPF"
-                        required
-                    ></v-text-field>
+                    <v-text-field v-model="os.cliente.cpf" label="CLIENTE: CPF" required></v-text-field>
                 </v-col>
                 <v-col cols="12" md="4">
-                    <v-text-field v-model="os.cliente.nome" :rules="nameRules" label="Nome"></v-text-field>
+                    <v-text-field v-model="os.cliente.nome" label="Nome"></v-text-field>
                 </v-col>
                 <v-col cols="12" md="4">
-                    <v-text-field v-model="os.cliente.email" :rules="emailRules" label="E-mail"></v-text-field>
+                    <v-text-field v-model="os.cliente.email" label="E-mail"></v-text-field>
                 </v-col>
                 <v-col cols="12" md="2">
                     <v-text-field v-model="os.cliente.telefone" label="Telefone"></v-text-field>
@@ -74,21 +69,37 @@
 
 <script>
 import { baseApiUrl } from "@/global.js";
+// import { mapState } from "vuex";
 import axios from "axios";
 
 export default {
+    mounted() {
+        if (this.$store.state.editOrder) {
+            this.os = this.$store.state.editOrder;
+        }
+    },
     props: ["osNextNumber"],
+    // computed: mapState(["dialogRegisterOS", "editOrder"]),
+    // watch: {
+    //     dialogRegisterOS(newValue) {
+    //         if (newValue && this.editOrder) {
+    //             this.os = this.editOrder;
+    //         }
+    //     }
+    // },
     methods: {
         async save() {
             await axios.post(`${baseApiUrl}/service-order`, this.os);
             this.$store.commit("reloadOS");
             this.$store.commit("reloadStatus");
             this.reset();
-            this.$emit("closeDialog");
+            this.$store.commit("SetDialogRegisterOS", false);
+            this.$store.commit("SetEditOrder", "");
         },
         cancel() {
             this.reset();
-            this.$emit("closeDialog");
+            this.$store.commit("SetDialogRegisterOS", false);
+            this.$store.commit("SetEditOrder", "");
         },
         reset() {
             this.os = {
@@ -143,13 +154,7 @@ export default {
                     serie: "",
                     acessorios: ""
                 }
-            },
-            cpfRules: [v => !!v || "Preencha o CPF"],
-            nameRules: [v => !!v || "Preencha o nome do cliente"],
-            emailRules: [
-                v => !!v || "Preencha o email do cliente",
-                v => /.+@.+/.test(v) || "E-mail não é valido"
-            ]
+            }
         };
     }
 };

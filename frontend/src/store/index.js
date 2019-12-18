@@ -9,8 +9,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        dialogRegisterOS: false,
         serviceOrder: [],
-        orderStatus: {}
+        orderStatus: {},
+        editOrder: ""
     },
     getters: {
         date() {
@@ -26,6 +28,12 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        SetEditOrder(state, payload) {
+            state.editOrder = payload
+        },
+        SetDialogRegisterOS(state, payload) {
+            state.dialogRegisterOS = payload
+        },
         reloadOS(state) {
             const url = `${baseApiUrl}/service-order`;
             axios.get(url).then(res => {

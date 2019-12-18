@@ -24,6 +24,10 @@
                     {{ item.situacao }}
                 </v-chip>
             </template>
+            <template v-slot:item.action="{ item }">
+                <v-icon dense class="mr-3" @click="addBudget(item)">attach_money</v-icon>
+                <v-icon dense @click="editItem(item)">edit</v-icon>
+            </template>
         </v-data-table>
     </v-card>
 </template>
@@ -37,18 +41,23 @@ export default {
     components: { Dialog },
     data() {
         return {
-            serviceOrder: [],
             search: "",
             headers: [
                 { text: "OS", value: "id" },
                 { text: "Nome", value: "cliente.nome" },
-                { text: "CPF", value: "cliente.cpf" },
                 { text: "Telefone", value: "cliente.telefone" },
-                { text: "Situação", value: "situacao" }
+                { text: "Marca", value: "produto.marca" },
+                { text: "Modelo", value: "produto.modelo" },
+                { text: "Situação", value: "situacao" },
+                { text: "Ações", value: "action", sortable: false }
             ]
         };
     },
     methods: {
+        editItem(os) {
+            this.$store.commit("SetDialogRegisterOS", true);
+            this.$store.commit("SetEditOrder", os);
+        },
         getColor(situacao) {
             if (situacao == "Aguardando Orçamento") return "primary";
             else if (situacao == "Aguardando Autorização") return "warning";
